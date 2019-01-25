@@ -1,0 +1,67 @@
+There are 2 major sections here, one is how to upgrade the SDK of your ESP8266 and the second one
+is how to make it work as a "WiFi Shield" for your Arduino UNO.
+
+For ESP-01 to work well with Arduino UNO, we need to upgrade the firmware of the ESP-01 to V2.2.1
+Steps to flash SDK :
+
+1) Put VCC and CH_PD of ESP-01 to 3.3V on UNO.
+   Put GND and GPIO0 of ESP-01 to GND on UNO.  
+   Put RX of ESP-01 to Pin0 on UNO.
+   Put TX of ESP-01 to Pin1 on UNO.
+   Leave the RESET pin unconnected now.
+   
+   You can refer to the pinout.jpg diagram.  Also you can refer to mysetup.jpg.
+
+2) Unrar nodemcu flasher and run the : \nodemcu-flasher-master\nodemcu-flasher-master\Win64\Release\ESP8266Flasher.exe
+
+3) On the flasher, click at the tab named "Config".  You will need to fill in the firmware location.
+
+4) Unzip the SDK. Follow this :
+
+\ESP8266_NONOS_SDK-2.2.1\ESP8266_NONOS_SDK-2.2.1\bin\boot_v1.2.bin                       -- 0x00000
+\ESP8266_NONOS_SDK-2.2.1\ESP8266_NONOS_SDK-2.2.1\bin\at\512+512\user1.1024.new2.bin      -- 0x01000
+\ESP8266_NONOS_SDK-2.2.1\ESP8266_NONOS_SDK-2.2.1\bin\blank.bin                           -- 0x7e000
+\ESP8266_NONOS_SDK-2.2.1\ESP8266_NONOS_SDK-2.2.1\bin\blank.bin                           -- 0x3fe000
+\ESP8266_NONOS_SDK-2.2.1\ESP8266_NONOS_SDK-2.2.1\bin\esp_init_data_default_v05.bin       -- 0x3fc000
+
+Fill in the above accordingly.
+
+5) Connect the RESET pin to UNO's GND for 2 seconds and then remove it.  This is to RESET the ESP-01 board properly.
+
+6) Then just click the Flash button. If everything is fine the flasher will show you the MAC Addresses, status of download and 
+   also your ESP-01 module led will blink very fast.
+
+7) Congratulations!!! you have successfully flashed V2.2.1 SDK to ESP8266.
+
+8) If the flasher did not find the MAC address, use the RESET pin and put it to GND for 2 seconds and then remove it 
+   from GND. Do it while the flasher is running (flashing mode). You can do it repeatedly until the flasher discover 
+   the addresses. It is very important to get the MAC Addresses.
+   
+
+OK, When done with flashing SDK, we are now ready to make it work with UNO as our WiFi "shield"
+Steps :
+
+1) Disconnect and connect the USB cable from your Arduino to your PC.
+2) Disconnect GPIO0 of ESP-01 from GND of UNO. **Important**
+3) Flash in Blank sketch into your Arduino.
+4) Open up Serial Monitor, baudrate 115200.
+5) Type "AT", click Send.  You should see a reply "OK"
+6) Type "AT+GMR", click Send.  You should see bunch of info about the SDK.
+7) Type "AT+UART=9600,8,1,0,0".  This will set ESP-01 to operate at 9600 baudrate. It shall reply with "OK"
+8) If everything is good, now is the time to load a meaningful sketch.
+
+Note : If no reply of the AT, it means your previous job of flashing SDK is not 100% correct.  Some mismatch 
+       happen on the selected bin file.  Please re-do according to my list above again.  To see what is wrong,
+       set baudrate to 74880 and put the RESET pin of the ESP-01 for 1 second and remove it.
+
+Real sketch operation :
+
+1) Install WiFiEsp-master.zip library.
+2) Load ConnectWPA.ino into your editor. Edit the SSID and password accordingly.
+3) Now, the important part, don't connect wrongly:  **Very Important**
+      Put RX of ESP-01 to Pin3 of UNO
+      Put TX of ESP-01 to Pin2 of UNO
+4) Upload the sketch.
+5) Open the Serial Monitor.
+6) You will see the ESP-01 is being recognized, and it is connecting with your Access Point.
+7) Congratulations!!!.  You just made it work with UNO.
