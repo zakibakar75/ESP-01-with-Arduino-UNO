@@ -20,6 +20,8 @@ Steps to flash SDK :
 
 5) Unzip the SDK. Follow this :
 
+(SDK 2.2.1 given as an example here, if you use another SDK version, change accordingly)
+
 \ESP8266_NONOS_SDK-2.2.1\ESP8266_NONOS_SDK-2.2.1\bin\boot_v1.2.bin                       -- 0x00000
 \ESP8266_NONOS_SDK-2.2.1\ESP8266_NONOS_SDK-2.2.1\bin\at\512+512\user1.1024.new2.bin      -- 0x01000
 \ESP8266_NONOS_SDK-2.2.1\ESP8266_NONOS_SDK-2.2.1\bin\blank.bin                           -- 0x7e000
