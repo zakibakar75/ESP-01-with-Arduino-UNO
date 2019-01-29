@@ -11,12 +11,14 @@ Steps to flash SDK :
    Leave the RESET pin unconnected now.
    
    You can refer to the pinout.jpg diagram.  Also you can refer to mysetup.jpg.
+   
+2) Upload a blank sketch to your Arduino UNO
 
-2) Unrar nodemcu flasher and run the : \nodemcu-flasher-master\nodemcu-flasher-master\Win64\Release\ESP8266Flasher.exe
+3) Unrar nodemcu flasher and run the : \nodemcu-flasher-master\nodemcu-flasher-master\Win64\Release\ESP8266Flasher.exe
 
-3) On the flasher, click at the tab named "Config".  You will need to fill in the firmware location.
+4) On the flasher, click at the tab named "Config".  You will need to fill in the firmware location.
 
-4) Unzip the SDK. Follow this :
+5) Unzip the SDK. Follow this :
 
 \ESP8266_NONOS_SDK-2.2.1\ESP8266_NONOS_SDK-2.2.1\bin\boot_v1.2.bin                       -- 0x00000
 \ESP8266_NONOS_SDK-2.2.1\ESP8266_NONOS_SDK-2.2.1\bin\at\512+512\user1.1024.new2.bin      -- 0x01000
@@ -26,14 +28,14 @@ Steps to flash SDK :
 
 Fill in the above accordingly.
 
-5) Connect the RESET pin to UNO's GND for 2 seconds and then remove it.  This is to RESET the ESP-01 board properly.
+6) Connect the RESET pin to UNO's GND for 2 seconds and then remove it.  This is to RESET the ESP-01 board properly.
 
-6) Then just click the Flash button. If everything is fine the flasher will show you the MAC Addresses, status of download and 
+7) Then just click the Flash button. If everything is fine the flasher will show you the MAC Addresses, status of download and 
    also your ESP-01 module led will blink very fast.
 
-7) Congratulations!!! you have successfully flashed V2.2.1 SDK to ESP8266.
+8) Congratulations!!! you have successfully flashed V2.2.1 SDK to ESP8266.
 
-8) If the flasher did not find the MAC address, use the RESET pin and put it to GND for 2 seconds and then remove it 
+9) If the flasher did not find the MAC address, use the RESET pin and put it to GND for 2 seconds and then remove it 
    from GND. Do it while the flasher is running (flashing mode). You can do it repeatedly until the flasher discover 
    the addresses. It is very important to get the MAC Addresses.
    
@@ -43,7 +45,7 @@ Steps :
 
 1) Disconnect and connect the USB cable from your Arduino to your PC.
 2) Disconnect GPIO0 of ESP-01 from GND of UNO. **Important**
-3) Flash in Blank sketch into your Arduino.
+3) Flash in (Upload) Blank sketch into your Arduino.
 4) Open up Serial Monitor, baudrate 115200.
 5) Type "AT", click Send.  You should see a reply "OK"
 6) Type "AT+GMR", click Send.  You should see bunch of info about the SDK.
